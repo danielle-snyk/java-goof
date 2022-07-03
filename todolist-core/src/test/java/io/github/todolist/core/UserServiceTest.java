@@ -36,6 +36,21 @@ import static org.junit.Assert.assertTrue;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:META-INF/spring/application-context.xml"})
 public class UserServiceTest {
+    
+public static void function2(HttpServletRequest request, HttpServletResponse response)
+       throws ServletException, IOException {
+      
+       try {
+           String callback = request.getParameter("callback");
+           response.setCharacterEncoding("UTF-8");
+           response.setHeader("Content-Type", callback == null ? "application/json" : "text/javascript");
+          
+           PrintWriter writer = response.getWriter();
+           if (callback != null) {
+               writer.write(callback);
+               writer.write("(");
+           }          
+   }
 
     @Autowired
     private UserService userService;
